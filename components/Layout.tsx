@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { ReactNode, useContext } from 'react';
 import Header from './Header';
 import {
   Container,
@@ -9,7 +9,11 @@ import {
 } from '@/components/mui';
 // import { UIContext } from './contexts/UI.context';
 
-function Layout({ children }) {
+interface Props {
+  children: ReactNode;
+}
+
+function Layout({ children }: Props) {
   return (
     <>
       <header>
