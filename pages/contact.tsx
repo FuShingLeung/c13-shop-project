@@ -1,7 +1,4 @@
 import Head from 'next/head';
-import Image from 'next/image';
-
-import { Button, EditIcon } from '@/components/mui';
 
 import Layout from '@/components/Layout';
 import Heading from '@/components/Heading';

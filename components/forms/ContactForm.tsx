@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 // import CircularProgress from "@mui/material/CircularProgress";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { TextField, Button } from '@/components/mui';
+
+import { ContactFormData } from '@/ts/interfaces/props.interfaces';
 
 const schema = yup
   .object()
@@ -20,9 +22,11 @@ const defaults = {
   message: '',
 };
 
-export default function ContactForm({ submitHandler }: { submitHandler: any }) {
-  // console.log(car);
-
+export default function ContactForm({
+  submitHandler,
+}: {
+  submitHandler: (val: ContactFormData) => void;
+}) {
   const {
     handleSubmit,
     formState: { errors, isValid, isDirty, isSubmitting },
@@ -43,7 +47,7 @@ export default function ContactForm({ submitHandler }: { submitHandler: any }) {
     marginBlockEnd: '1em',
   };
 
-  let submitFn = (vals: any) => {
+  let submitFn = (vals: ContactFormData) => {
     reset();
     console.log('vals', vals);
     submitHandler(vals);

@@ -1,7 +1,11 @@
 import Button from '@mui/material/Button';
-import Alert from '@mui/material/Alert'
+import Alert from '@mui/material/Alert';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
 import Container from '@mui/material/Container';
 import Drawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
@@ -24,6 +28,10 @@ export {
   Alert,
   AppBar,
   Box,
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
   Container,
   Drawer,
   Divider,

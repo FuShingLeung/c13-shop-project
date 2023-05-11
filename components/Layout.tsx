@@ -9,7 +9,7 @@ import {
 } from '@/components/mui';
 // import { UIContext } from './contexts/UI.context';
 
-import Props from '@/ts/interfaces/props.interfaces';
+import { Props } from '@/ts/interfaces/props.interfaces';
 
 function Layout({ children }: Props) {
   return (

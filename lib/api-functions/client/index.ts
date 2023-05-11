@@ -1,4 +1,6 @@
-export const sendMail = async (vals: any) => {
+import { ContactFormData } from "@/ts/interfaces/props.interfaces";
+
+export const sendMail = async (vals: ContactFormData) => {
   console.log(vals);
   try {
     const response = await fetch('/api/contact', {
