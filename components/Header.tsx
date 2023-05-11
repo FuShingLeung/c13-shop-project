@@ -1,6 +1,5 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
+import { Box } from '@/components/mui';
 import MobileNavigation from '@/components/navigation/MobileNavigation';
 import DesktopNavigation from '@/components/navigation/DesktopNavigation';
 // import ErrorBoundary from "./debug/ErrorBoundary";

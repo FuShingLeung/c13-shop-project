@@ -1,4 +1,4 @@
-export const sendMail = async (vals) => {
+export const sendMail = async (vals: any) => {
   console.log(vals);
   try {
     const response = await fetch('/api/contact', {

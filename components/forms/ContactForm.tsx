@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 // import CircularProgress from "@mui/material/CircularProgress";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button } from '@/components/mui';
 
 const schema = yup
   .object()
@@ -20,7 +20,7 @@ const defaults = {
   message: '',
 };
 
-export default function ContactForm({ submitHandler }) {
+export default function ContactForm({ submitHandler }: { submitHandler: any }) {
   // console.log(car);
 
   const {
@@ -43,9 +43,9 @@ export default function ContactForm({ submitHandler }) {
     marginBlockEnd: '1em',
   };
 
-  let submitFn = (vals) => {
+  let submitFn = (vals: any) => {
     reset();
-    console.log(vals);
+    console.log('vals', vals);
     submitHandler(vals);
   };
 
@@ -63,8 +63,8 @@ export default function ContactForm({ submitHandler }) {
               {...field}
               label="from"
               fullWidth
-              error={!!errors.name}
-              helperText={errors.name?.message}
+              error={!!errors.from}
+              helperText={errors.from?.message}
             />
           )}
         />
@@ -120,7 +120,7 @@ export default function ContactForm({ submitHandler }) {
         </Button>
         <Button
           type="submit"
-          primary="true"
+          color="primary"
           variant="contained"
           disabled={isSubmitting || !isDirty || (isDirty && !isValid)}
         >
