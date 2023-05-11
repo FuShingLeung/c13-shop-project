@@ -1,4 +1,5 @@
 import { Typography } from '@/components/mui';
+import { Variant } from '@mui/material/styles/createTypography';
 
 const Heading = ({
   component = 'h1',
@@ -6,8 +7,8 @@ const Heading = ({
   children,
   ...props
 }: {
-  component: string;
-  variant: string;
+  component: React.ElementType;
+  variant: Variant;
   children: String;
 }) => {
   return (

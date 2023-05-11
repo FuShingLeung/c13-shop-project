@@ -5,6 +5,8 @@ import { Button, EditIcon } from '@/components/mui';
 
 import Layout from '@/components/Layout';
 import Heading from '@/components/Heading';
+import ContactForm from '@/components/forms/ContactForm';
+import { sendMail } from '@/lib/api-functions/client';
 
 export default function Contact() {
   return (
@@ -19,9 +21,7 @@ export default function Contact() {
         <Heading component="h2" variant="h4">
           Contact Us
         </Heading>
-        <Button variant="contained">
-          Button <EditIcon />
-        </Button>
+        <ContactForm submitHandler={sendMail} />
       </Layout>
     </>
   );
