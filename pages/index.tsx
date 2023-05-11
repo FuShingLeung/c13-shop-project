@@ -3,6 +3,8 @@ import Head from 'next/head';
 import { Button, EditIcon } from '@/components/mui';
 
 import Layout from '@/components/Layout';
+import Heading from '@/components/Heading';
+import Paragraph from '@/components/Paragraph';
 
 // const inter = Inter({ subsets: ['latin'] });
 
@@ -16,7 +18,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <h1>Home page</h1>
+        <Heading component="h2" variant="h4">
+          Home page
+        </Heading>
+        <Paragraph>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum
+          reprehenderit id aspernatur quas dolorum. Eveniet ducimus quis
+          corrupti repellendus hic eum esse facere, aut pariatur praesentium
+          harum commodi. Maiores, voluptas!
+        </Paragraph>
         <Button variant="contained">
           Button <EditIcon />
         </Button>
