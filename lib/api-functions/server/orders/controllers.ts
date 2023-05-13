@@ -1,24 +1,23 @@
-import { addProductSchema, updateProductSchema } from '@/lib/validation/';
 import {
-  fetchProduct,
-  fetchProducts,
+  getOrderQuery,
+  getOrdersQuery,
+  getUserOrdersQuery,
   add,
   update,
   remove,
-} from '@/lib/api-functions/server/products/queries';
-
+} from '@/lib/api-functions/server/orders/queries';
 import { Request, Response } from 'express';
 
-const getProducts = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  console.log('🚀 ~ file: controllers.js:9 ~ getProducts ~ id:', id);
+const getOrders = async (req: Request, res: Response) => {
+  const { owner } = req.params;
+  console.log('🚀 ~ file: controllers.js:9 ~ getOrders ~ owner:', owner);
 
   try {
     let data = [];
-    if (id) {
-      data = await fetchProduct(id);
+    if (owner) {
+      data = await getOrderQuery(owner);
     } else {
-      data = await fetchProducts();
+      data = await getOrdersQuery();
     }
     res.status(200).json(data);
   } catch (err) {
@@ -27,23 +26,36 @@ const getProducts = async (req: Request, res: Response) => {
   }
 };
 
-const addProduct = async (req: Request, res: Response) => {
-  let productData = { ...req.body };
-
-  if (productData.image === '') {
-    delete productData.image;
-  }
-  console.info(productData);
+const getOwnOrders = async (req: Request, res: Response) => {
+  const { owner } = req.params;
+  console.log('🚀 ~ file: controllers.js:9 ~ getOrders ~ owner:', owner);
 
   try {
-    productData = await addProductSchema.validate(productData);
+    const data = await getUserOrdersQuery(req.user.sub);
+    res.status(200).json(data);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+};
+
+const addOrder = async (req: Request, res: Response) => {
+  let orderData = { ...req.body };
+
+  if (orderData.image === '') {
+    delete orderData.image;
+  }
+  console.info(orderData);
+
+  try {
+    orderData = await addOrderSchema.validate(orderData);
   } catch (err) {
     console.log(err);
     return res.status(400).json(err);
   }
 
   try {
-    const result = await add(productData);
+    const result = await add(orderData);
     res.status(201).json(result);
   } catch (err) {
     console.error(err);
@@ -51,7 +63,7 @@ const addProduct = async (req: Request, res: Response) => {
   }
 };
 
-const updateProduct = async (req: Request, res: Response) => {
+const updateOrder = async (req: Request, res: Response, isAdmin) => {
   const { id } = req.params;
   console.log(id);
 
@@ -62,7 +74,7 @@ const updateProduct = async (req: Request, res: Response) => {
   let updates = { ...req.body };
 
   try {
-    updates = await updateProductSchema.validate(updates);
+    updates = await updateOrderSchema.validate(updates);
   } catch (err) {
     console.log(err);
     return res.status(400).json(err);
@@ -78,9 +90,9 @@ const updateProduct = async (req: Request, res: Response) => {
   }
 };
 
-const removeProduct = async (req: Request, res: Response) => {
+const removeOrder = async (req: Request, res: Response) => {
   const { id } = req.params;
-  console.log('🚀 ~ file: controllers.js:99 ~ removeProduct ~ id:', id);
+  console.log('🚀 ~ file: controllers.js:99 ~ removeOrder ~ id:', id);
 
   if (!id) {
     return res.status(400).json({ message: 'No id provided to delete' });
@@ -104,4 +116,4 @@ const removeProduct = async (req: Request, res: Response) => {
   }
 };
 
-export { getProducts, addProduct, updateProduct, removeProduct };
+export { getOrders, getOwnOrders, addOrder, updateOrder, removeOrder };
