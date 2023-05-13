@@ -5,7 +5,6 @@ const { DB_URL = 'mongodb://127.0.0.1:27017/products' } = process.env;
 main().catch((err) => logger.error(err));
 
 async function main() {
-  console.log('test db connection');
   try {
     await mongoose.connect(DB_URL);
     console.log('DB Connected');

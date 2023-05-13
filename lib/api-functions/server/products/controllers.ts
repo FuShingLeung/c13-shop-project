@@ -1,30 +1,31 @@
-import Product from '@/lib/api-functions/server/products/model';
+import db from '@/lib/api-functions/server/db';
 
-// import { addProductSchema, updateProductSchema } from '@/lib/validation/';
-// import {
-//   fetchProduct,
-//   fetchProducts,
-//   add,
-//   update,
-//   remove,
-// } from "@/lib/api-functions/server/products/queries";
+import Product from '@/lib/api-functions/server/products/model';
+// import addProductSchema, { updateProductSchema } from "@/lib/validation/";
 
 const getProducts = async (req, res) => {
   console.log(req.params);
   const { id } = req.params;
-  // const id = req.query.id && req.query.id[0];
+  console.log('🚀 ~ file: controllers.js:9 ~ getProducts ~ id:', id);
 
   if (process.env.NODE_ENV === 'production') {
     res.setHeader('Cache-Control', 's-maxage=10, stale-while-revalidate');
   }
 
+  //   // Does not work locally but will on Vercel
+  //   res.setHeader("Cache-Control", "s-maxage=10, stale-while-revalidate");
+  // console.log("req.user", req.user);
   const query = {};
+
+  // if (!isAdmin) {
+  //   query.owner = req.user.sub;
+  // } else {
+  //   console.log("in admin mode");
+  // }
 
   if (id) {
     query._id = id;
   }
-
-  console.log('ah ah ahah ahh');
 
   try {
     const products = await Product.find(query);
@@ -35,20 +36,23 @@ const getProducts = async (req, res) => {
   }
 };
 
-const addProduct = async (req, res) => {
+const addProduct = async (req, res, isAdmin) => {
   let productData = { ...req.body };
 
-  if (productData.avatar_url === '') {
-    delete productData.avatar_url;
+  // Admin would send a users sub when creating on behalf of a user and that would be part of the request body, so would happen in the line above.
+  // if (!isAdmin) {
+  //   productData.owner = req.user.sub;
+  // }
+  if (productData.image === '') {
+    delete productData.image;
   }
   console.info(productData);
 
-  try {
-    productData = await addProductSchema.validate(productData);
-  } catch (err) {
-    console.log(err);
-    return res.status(400).json(err);
-  }
+  // try {
+  //   productData = await addProductSchema.validate(productData);
+  // } catch (err) {
+  //   return res.status(400).json(err);
+  // }
 
   try {
     const newProduct = new Product(productData);
@@ -58,35 +62,29 @@ const addProduct = async (req, res) => {
     console.error(err);
     res.status(500).send(err);
   }
-
-  // try {
-  //   const result = await add(productData);
-  //   res.status(201).json(result);
-  // } catch (err) {
-  //   console.error(err);
-  //   res.status(500).send(err);
-  // }
 };
 
-const updateProduct = async (req, res) => {
-  // const { id } = req.params;
-  const id = req.query.id && req.query.id[0];
+const updateProduct = async (req, res, isAdmin) => {
+  const { id } = req.params;
   console.log(id);
 
   if (!id) {
     return res.status(400).json({ message: 'No id provided to update' });
   }
-
   const query = { _id: id };
   let { owner, ...updates } = req.body;
-  // let updates = { ...req.body };
 
-  try {
-    updates = await updateProductSchema.validate(updates);
-  } catch (err) {
-    console.log(err);
-    return res.status(400).json(err);
-  }
+  // if (!isAdmin) {
+  //   query.owner = req.user.sub;
+  // } else {
+  //   query.owner = owner;
+  // }
+
+  // try {
+  //   updates = await updateProductSchema.validate(updates);
+  // } catch (err) {
+  //   return res.status(400).json(err);
+  // }
 
   try {
     const result = await Product.updateOne(query, updates);
@@ -96,20 +94,11 @@ const updateProduct = async (req, res) => {
     console.error(err);
     res.status(500).send(err);
   }
-
-  // try {
-  //   const result = await update(id, updates);
-  //   if (result.n === 0) return res.status(404).send({ message: 'Not Found' });
-  //   return res.status(200).send({ message: 'Updated' });
-  // } catch (err) {
-  //   console.error(err);
-  //   res.status(500).send(err);
-  // }
 };
 
 const removeProduct = async (req, res) => {
-  // const { id } = req.params;
-  const id = req.query.id && req.query.id[0];
+  const { id } = req.params;
+  console.log('🚀 ~ file: controllers.js:99 ~ removeProduct ~ id:', id);
 
   if (!id) {
     return res.status(400).json({ message: 'No id provided to delete' });

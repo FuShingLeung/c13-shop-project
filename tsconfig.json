@@ -19,6 +19,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/500.tsx", "pages/api/v1/products/[[...id]].ts", "db.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/500.tsx", "pages/api/v1/products/[[...id]].ts", "db.js", "lib/api-functions/server/products/model.js"],
   "exclude": ["node_modules"]
 }
