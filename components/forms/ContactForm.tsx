@@ -39,17 +39,12 @@ export default function ContactForm({
     defaultValues: defaults,
   });
 
-  useEffect(() => {
-    console.log(formState);
-  });
-
   const formRowStyle = {
     marginBlockEnd: '1em',
   };
 
   let submitFn = (vals: ContactFormData) => {
     reset();
-    console.log('vals', vals);
     submitHandler(vals);
   };
 

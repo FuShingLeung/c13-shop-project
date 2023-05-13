@@ -9,15 +9,6 @@ sgMail.setApiKey(SENDGRID_API_KEY);
 const handler = async (req: Request, res: Response) => {
   const { from, subject, message } = req.body;
 
-  // interface Msg {
-  //   to: string;
-  //   cc: string;
-  //   from: string;
-  //   subject: string;
-  //   text: string;
-  //   html: string;
-  // }
-
   const msg = {
     to: from,
     cc: ADMIN_EMAIL,
@@ -26,8 +17,6 @@ const handler = async (req: Request, res: Response) => {
     text: message,
     html: `<p>${message}<p>`,
   };
-  console.log(req.body);
-  console.log(msg);
 
   try {
     await sgMail.send(msg);

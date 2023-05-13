@@ -5,5 +5,6 @@ declare namespace NodeJS {
     ADMIN_EMAIL_PASSWORD: string;
     HYGRAPH_ENDPOINT: string;
     HYGRAPH_TOKEN: string;
+    DB_URL: string;
   }
 }

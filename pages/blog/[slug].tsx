@@ -21,7 +21,6 @@ const { HYGRAPH_ENDPOINT, HYGRAPH_TOKEN } = process.env;
 import { SingleBlogPost } from '@/ts/interfaces/props.interfaces';
 
 export default function BlogPost({ ssd }: { ssd: SingleBlogPost }) {
-  console.log('ssd ahhh', ssd);
   const {
     title,
     body,
@@ -56,7 +55,6 @@ export default function BlogPost({ ssd }: { ssd: SingleBlogPost }) {
 }
 
 export const getStaticPaths = async () => {
-  console.log('test ahhh');
   const allPosts = await fetch(HYGRAPH_ENDPOINT, {
     method: 'POST',
     headers: {
@@ -69,7 +67,7 @@ export const getStaticPaths = async () => {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log('res.data.blogposts', res.data.blogPosts);
+      console.log(res.data.blogPosts);
       return res.data.blogPosts;
     })
     .catch((err) => console.log(err));
@@ -85,8 +83,6 @@ export const getStaticProps = async ({
 }: {
   params: SingleBlogPost;
 }) => {
-  console.log('test staticprops');
-  console.log('params', params);
   const { blogPost: post } = await fetch(HYGRAPH_ENDPOINT, {
     method: 'POST',
     headers: {

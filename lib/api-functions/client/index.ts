@@ -1,7 +1,6 @@
 import { ContactFormData } from "@/ts/interfaces/props.interfaces";
 
 export const sendMail = async (vals: ContactFormData) => {
-  console.log(vals);
   try {
     const response = await fetch('/api/contact', {
       method: 'POST',
@@ -11,7 +10,6 @@ export const sendMail = async (vals: ContactFormData) => {
       body: JSON.stringify(vals),
     });
     if (!response.ok) throw Response;
-    console.log('Email sent');
     //TODO - Hook up to snackbar
   } catch (err) {
     console.log(err);
