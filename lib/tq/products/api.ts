@@ -1,40 +1,39 @@
-import axios from "axios";
+import { ProductType } from '@/ts/interfaces/props.interfaces';
+import axios from 'axios';
 
-const {
-  host='http://localhost:3000'
-} = process.env;
+const { host = 'http://localhost:3000' } = process.env;
 
 export const PRODUCTS_ENDPOINT = `${host}/api/v1/products/`;
 
 export const fetchProducts = async () => {
-  const {data} = await axios(PRODUCTS_ENDPOINT);
+  const { data } = await axios(PRODUCTS_ENDPOINT);
   console.log(data);
   // await new Promise((r) => setTimeout(r, 1000)); // simulate server delay
   return data;
 };
 
-export const addProduct = async (data) => {
-  console.log("about to add", data);
+export const addProduct = async (data: ProductType) => {
+  console.log('about to add', data);
   const response = await axios({
-    method: "POST",
+    method: 'POST',
     url: PRODUCTS_ENDPOINT,
     data,
   });
   return response.data;
 };
 
-export const updateProduct = async ({ _id, ...data }) => {
+export const updateProduct = async ({ _id, ...data }: { _id: string }) => {
   const response = await axios({
     url: `${PRODUCTS_ENDPOINT}${_id}`,
-    method: "PUT",
+    method: 'PUT',
     data,
   });
   return response.data;
 };
 
-export const deleteProduct = async (id) => {
+export const deleteProduct = async (id: string) => {
   return await axios({
-    method: "DELETE",
+    method: 'DELETE',
     url: `${PRODUCTS_ENDPOINT}${id}`,
   });
 };

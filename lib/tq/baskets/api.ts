@@ -1,3 +1,4 @@
+import { BasketType } from '@/ts/interfaces/props.interfaces';
 import axios from 'axios';
 
 export const BASKETS_ENDPOINT = '/api/v1/baskets/';
@@ -9,7 +10,7 @@ export const fetchUserBasket = async () => {
   return data;
 };
 
-export const addToBasket = async (itemID) => {
+export const addToBasket = async (itemID: string) => {
   console.log('addToBasket', itemID);
   const response = await axios({
     method: 'POST',
@@ -19,7 +20,7 @@ export const addToBasket = async (itemID) => {
   return response.data;
 };
 
-export const removeItemFromUserBasket = async (itemID) => {
+export const removeItemFromUserBasket = async (itemID: string) => {
   return await axios({
     method: 'DELETE',
     url: `${BASKETS_ENDPOINT}own/${itemID}`,
@@ -39,7 +40,7 @@ export const fetchBaskets = async () => {
   return data;
 };
 
-export const addBasket = async (data) => {
+export const addBasket = async (data: BasketType) => {
   const response = await axios({
     method: 'POST',
     url: BASKETS_ENDPOINT,
@@ -48,7 +49,13 @@ export const addBasket = async (data) => {
   return response.data;
 };
 
-export const updateBasket = async ({ id, data }) => {
+export const updateBasket = async ({
+  id,
+  data,
+}: {
+  id: string;
+  data: BasketType;
+}) => {
   const response = await axios({
     url: `${BASKETS_ENDPOINT}${id}`,
     method: 'PUT',
@@ -57,7 +64,7 @@ export const updateBasket = async ({ id, data }) => {
   return response.data;
 };
 
-export const deleteBasket = async (id) => {
+export const deleteBasket = async (id: string) => {
   return await axios({
     method: 'DELETE',
     url: `${BASKETS_ENDPOINT}${id}`,

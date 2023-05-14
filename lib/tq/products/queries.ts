@@ -4,7 +4,7 @@ import { STORAGE_KEY } from './settings';
 
 export const useProducts = ({
   onSuccess = () => {},
-  onError = (err) => {
+  onError = (err: Error) => {
     console.log(err);
   },
 } = {}) =>

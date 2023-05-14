@@ -3,13 +3,12 @@ import React, { createContext, useState, useCallback } from 'react';
 import { ReactElement } from 'react';
 
 export const UIContext = createContext({
-  snackbar: {
-    isOpen: false,
-    hideDuration: 6000,
-    onClose: () => {},
-    message: 'success',
-    showMessage: () => {},
-  },
+  isOpen: true,
+  hideDuration: 6000,
+  onClose: () => {},
+  message: 'success',
+  showMessage: (type: string, string: string) => {},
+  severity: 'info',
 });
 
 export const UIProvider = ({ children }: { children: ReactElement }) => {
@@ -23,7 +22,7 @@ export const UIProvider = ({ children }: { children: ReactElement }) => {
     setSeverity('');
   };
 
-  const showMessage = ({ type, string }: { type: string; string: string }) => {
+  const showMessage = (type: string, string: string) => {
     console.log('type', type, 'string', string);
     setOpen(true);
     setMessage(string);
@@ -33,7 +32,7 @@ export const UIProvider = ({ children }: { children: ReactElement }) => {
   return (
     <UIContext.Provider
       value={{
-        isOpen: open,
+        isOpen: true,
         hideDuration: 6000,
         onClose,
         message,

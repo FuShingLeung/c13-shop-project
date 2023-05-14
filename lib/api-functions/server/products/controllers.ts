@@ -69,7 +69,7 @@ const updateProduct = async (req: Request, res: Response) => {
   }
 
   try {
-    const result = await update(id, updates);
+    const result: any = await update(id, updates);
     if (result.n === 0) return res.status(404).send({ message: 'Not Found' });
     return res.status(200).send({ message: 'Updated' });
   } catch (err) {
@@ -95,7 +95,7 @@ const removeProduct = async (req: Request, res: Response) => {
   // }
 
   try {
-    const result = await remove(id);
+    const result: any = await remove(id);
     if (result.n === 0) return res.status(404).send({ message: 'Not Found' });
     res.status(204).send();
   } catch (err) {

@@ -1,8 +1,17 @@
 import { ReactNode } from 'react';
 import { Schema } from 'yup';
+import Request from 'express';
 
 export interface Props {
   children: ReactNode;
+}
+
+declare global {
+  namespace Express {
+    interface Request {
+      user: Record<string, any>;
+    }
+  }
 }
 
 export interface ContactFormData {
@@ -40,4 +49,12 @@ export interface ProductType {
   image: string;
   price: number;
   quantity: number;
+}
+
+export interface ProductListType {
+  deleteHandler: () => {};
+  headingLevel: number;
+  canUpdate: boolean;
+  canRemove: boolean;
+  canBuy: boolean;
 }

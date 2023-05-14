@@ -1,3 +1,4 @@
+import { OrderType } from '@/ts/interfaces/props.interfaces';
 import axios from 'axios';
 
 export const ORDERS_ENDPOINT = '/api/v1/orders/';
@@ -14,7 +15,7 @@ export const fetchUserOrders = async () => {
   return data;
 };
 
-export const addOrder = async (data) => {
+export const addOrder = async (data: OrderType) => {
   console.log('about to add', data);
   const response = await axios({
     method: 'POST',
@@ -24,7 +25,13 @@ export const addOrder = async (data) => {
   return response.data;
 };
 
-export const updateOrder = async ({ id, data }) => {
+export const updateOrder = async ({
+  id,
+  data,
+}: {
+  id: string;
+  data: OrderType;
+}) => {
   console.log('in api', id, data);
   const response = await axios({
     url: `${ORDERS_ENDPOINT}${id}`,
@@ -34,7 +41,7 @@ export const updateOrder = async ({ id, data }) => {
   return response.data;
 };
 
-export const deleteOrder = async (id) => {
+export const deleteOrder = async (id: string) => {
   return await axios({
     method: 'DELETE',
     url: `${ORDERS_ENDPOINT}${id}`,

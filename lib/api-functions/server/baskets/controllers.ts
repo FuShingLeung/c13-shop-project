@@ -11,7 +11,7 @@ import { Request, Response } from 'express';
 const getBaskets = async (req: Request, res: Response) => {
   const { owner } = req.params;
 
-  const query = {};
+  const query: { owner: string } = { owner };
 
   if (owner) {
     query.owner = owner;
@@ -84,7 +84,7 @@ const updateBasket = async (req: Request, res: Response) => {
   let updates = { ...req.body };
 
   try {
-    const result = await update(id, updates);
+    const result: any = await update(id, updates);
     if (result.n === 0) return res.status(404).end('Not Found');
     return res.status(200).json({ message: 'Updated' });
   } catch (err) {
@@ -102,7 +102,7 @@ const removeBasket = async (req: Request, res: Response) => {
   }
 
   try {
-    const result = await remove(id);
+    const result: any = await remove(id);
     if (result.n === 0) return res.status(404).send({ message: 'Not Found' });
     res.status(204).send();
   } catch (err) {
@@ -123,7 +123,7 @@ const removeItemFromBasket = async (req: Request, res: Response) => {
 
   try {
     // All handler
-    let result = {};
+    let result: any = {};
     if (item === 'all') {
       result = await empty(owner);
       ``;
@@ -131,7 +131,7 @@ const removeItemFromBasket = async (req: Request, res: Response) => {
       const [basket] = await getUserBasketQuery(owner);
       console.log('b', basket);
       if (basket) {
-        const idx = basket.items.findIndex((i) => i._id.toString() === item);
+        const idx = basket.items.findIndex((i: any) => i._id.toString() === item);
         console.log('idx', idx);
         if (idx !== -1) {
           basket.items = [

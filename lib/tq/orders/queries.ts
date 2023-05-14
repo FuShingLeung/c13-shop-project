@@ -4,7 +4,7 @@ import { STORAGE_KEY, USER_ORDERS_STORAGE_KEY } from './settings';
 
 export const useOrders = ({
   onSuccess = () => {},
-  onError = (err) => {
+  onError = (err: Error) => {
     console.log(err);
   },
 } = {}) =>
@@ -18,7 +18,7 @@ export const useOrders = ({
 
 export const useUserOrders = ({
   onSuccess = () => {},
-  onError = (err) => {
+  onError = (err: Error) => {
     console.log(err);
   },
 } = {}) =>

@@ -21,14 +21,14 @@ import { slugify, formatPrice } from '@/lib/utils/formatters';
 import { ProductType } from '@/ts/interfaces/props.interfaces';
 
 const ProductDisplay = ({
-  product: { _id, title, image, price, quantity } = {},
+  product: { _id = '', title = '', image = '', price = 0, quantity = 0 } = {},
+  headingLevel = {},
   deleteHandler = (id: string) => {
     console.log('no delete handler supplied');
   },
-  addToBasket = (id: string) => {
+  addToBasket = (id: any) => {
     console.log('no addToBasket handler supplied', id);
   },
-  headingLevel = 2,
   canUpdate = false,
   canRemove = false,
   canBuy = false,
@@ -39,7 +39,7 @@ const ProductDisplay = ({
         <Image alt={title} src={image} width="500" height="500" />
       </CardMedia>
       <CardContent>
-        <Heading component={`h${headingLevel}`} sx={{ textAlign: 'center' }}>
+        <Heading component={`h2`} variant="h2">
           {title}
         </Heading>
         <List

@@ -1,5 +1,5 @@
 import React, { ReactNode, useContext } from 'react';
-import Header from './Header';
+import Header from '@/components/Header';
 import {
   Container,
   Alert,

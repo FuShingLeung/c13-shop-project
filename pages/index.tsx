@@ -12,8 +12,6 @@ import Paragraph from '@/components/Paragraph';
 import QueryBoundaries from '@/components/QueryBoundaries';
 import ProductList from '@/components/ProductList';
 
-// const inter = Inter({ subsets: ['latin'] });
-
 export default function Home() {
   return (
     <>

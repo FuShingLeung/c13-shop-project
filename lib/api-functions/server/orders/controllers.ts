@@ -47,12 +47,12 @@ const addOrder = async (req: Request, res: Response) => {
   }
   console.info(orderData);
 
-  try {
-    orderData = await addOrderSchema.validate(orderData);
-  } catch (err) {
-    console.log(err);
-    return res.status(400).json(err);
-  }
+  // try {
+  //   orderData = await addOrderSchema.validate(orderData);
+  // } catch (err) {
+  //   console.log(err);
+  //   return res.status(400).json(err);
+  // }
 
   try {
     const result = await add(orderData);
@@ -63,7 +63,7 @@ const addOrder = async (req: Request, res: Response) => {
   }
 };
 
-const updateOrder = async (req: Request, res: Response, isAdmin) => {
+const updateOrder = async (req: Request, res: Response) => {
   const { id } = req.params;
   console.log(id);
 
@@ -73,15 +73,15 @@ const updateOrder = async (req: Request, res: Response, isAdmin) => {
 
   let updates = { ...req.body };
 
-  try {
-    updates = await updateOrderSchema.validate(updates);
-  } catch (err) {
-    console.log(err);
-    return res.status(400).json(err);
-  }
+  // try {
+  //   updates = await updateOrderSchema.validate(updates);
+  // } catch (err) {
+  //   console.log(err);
+  //   return res.status(400).json(err);
+  // }
 
   try {
-    const result = await update(id, updates);
+    const result: any = await update(id, updates);
     if (result.n === 0) return res.status(404).send({ message: 'Not Found' });
     return res.status(200).send({ message: 'Updated' });
   } catch (err) {
@@ -107,7 +107,7 @@ const removeOrder = async (req: Request, res: Response) => {
   // }
 
   try {
-    const result = await remove(id);
+    const result: any = await remove(id);
     if (result.n === 0) return res.status(404).send({ message: 'Not Found' });
     res.status(204).send();
   } catch (err) {
