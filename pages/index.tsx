@@ -25,9 +25,9 @@ export default function Home() {
         <Heading component="h2" variant="h4">
           Home page
         </Heading>
-        <QueryBoundaries>
+        {/* <QueryBoundaries>
           <ProductList />
-        </QueryBoundaries>
+        </QueryBoundaries> */}
         <Button variant="contained">
           Button <EditIcon />
         </Button>

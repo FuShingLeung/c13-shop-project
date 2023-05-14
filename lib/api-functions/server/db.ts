@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
-const { DB_URL = 'mongodb://127.0.0.1:27017/design-shop' } = process.env;
+const { DB_URL = 'mongodb://127.0.0.1:27017/products' } = process.env;
 
-main().catch((err) => console.error(err));
+main().catch((err) => logger.error(err));
 
 async function main() {
   try {

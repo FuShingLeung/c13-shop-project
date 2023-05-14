@@ -27,7 +27,8 @@
     "pages/500.tsx",
     "pages/api/v1/products/[[...id]].ts",
     "db.js",
-    "lib/api-functions/server/products/model.js"
-  ],
+    "lib/api-functions/server/products(test)/model.js",
+    "lib/api-functions/server/products(test)/queries.ts"
+, "lib/api-functions/server/products/queries.js"  ],
   "exclude": ["node_modules"]
 }

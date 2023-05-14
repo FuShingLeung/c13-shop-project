@@ -16,7 +16,7 @@ import {
   Box,
 } from '@/components/mui';
 import Heading from '@/components/Heading';
-import { slugify, formatPrice } from '@/lib/utils/formatters';
+import { slugify, formatPrice } from '@/lib/util/formatters';
 
 import { ProductType } from '@/ts/interfaces/props.interfaces';
 
