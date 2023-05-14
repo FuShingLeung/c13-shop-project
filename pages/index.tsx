@@ -36,8 +36,8 @@ export default function Home() {
   );
 }
 
-export async function getStaticProps() {
-  const products = await fetchProducts().catch((err) => console.log(err));
+export const getStaticProps = async () => {
+  const products = await fetchProducts().catch((err) => console.log('Index.tsx error', err));
   const queryClient = new QueryClient();
 
   await queryClient.setQueryData(

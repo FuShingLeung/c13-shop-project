@@ -33,7 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <CssBaseline />
-      <UserProvider>
+      {/* <UserProvider> */}
         <ThemeProvider theme={theme}>
           <QueryClientProvider client={queryClient}>
             <ReactQueryDevtools />
@@ -44,7 +44,7 @@ export default function App({ Component, pageProps }: AppProps) {
             </Hydrate>
           </QueryClientProvider>
         </ThemeProvider>
-      </UserProvider>
+      {/* </UserProvider> */}
     </>
   );
 }

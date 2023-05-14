@@ -14,7 +14,7 @@ const ProductList = ({
   canRemove = false,
   canBuy = true,
 }) => {
-  const { user } = useUser();
+  // const { user } = useUser();
   const mutation = useAddToBasket();
 
   const { data: products } = useProducts();
@@ -35,7 +35,7 @@ const ProductList = ({
             headingLevel={headingLevel}
             canUpdate={canUpdate}
             canRemove={canRemove}
-            canBuy={!!user && canBuy}
+            // canBuy={!!user && canBuy}
             addToBasket={() => mutation.mutate(product._id)}
           />
         </ListItem>
