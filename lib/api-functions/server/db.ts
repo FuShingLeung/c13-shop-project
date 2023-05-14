@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 
-const { DB_URL = 'mongodb://127.0.0.1:27017/products' } = process.env;
+const { MONGODB_URI = 'mongodb://127.0.0.1:27017/products' } = process.env;
 
-main().catch((err) => logger.error(err));
+main().catch((err) => console.error(err));
 
 async function main() {
   try {
-    await mongoose.connect(DB_URL);
+    await mongoose.connect(MONGODB_URI);
     console.log('DB Connected');
   } catch (err) {
     console.error(err);
