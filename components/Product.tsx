@@ -66,7 +66,10 @@ const ProductDisplay = ({
       </CardContent>
       <CardActions sx={{ display: 'grid', placeItems: 'center' }}>
         <Box>
-          <Button href={`/products/${slugify(title, _id)}`} component={Link}>
+          <Button
+            href={`/admin/products/${slugify(title, _id)}`}
+            component={Link}
+          >
             View
           </Button>
           {canUpdate && (

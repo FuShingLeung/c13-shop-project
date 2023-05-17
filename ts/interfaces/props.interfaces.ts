@@ -20,6 +20,15 @@ export interface ContactFormData {
   message: string;
 }
 
+export interface ProductFormData {
+  _id: string;
+  title: string;
+  description?: string;
+  image: string;
+  price: number;
+  quantity: number;
+}
+
 export interface SingleBlogPost {
   body: string;
   createdAt: string;
@@ -46,6 +55,7 @@ export interface OrderType {
 export interface ProductType {
   _id: string;
   title: string;
+  description?: string;
   image: string;
   price: number;
   quantity: number;

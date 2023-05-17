@@ -1,15 +1,11 @@
 import Order from '@/lib/api-functions/server/orders/model';
 import { OrderType } from '@/ts/interfaces/props.interfaces';
 
-export const getOrdersQuery = async (query = {}) => {
+export const fetchOrders = async (query = {}) => {
   return await Order.find(query).exec();
 };
 
-export const getUserOrdersQuery = async (sub: any) => {
-  return await Order.find({ owner: sub }).exec();
-};
-
-export const getOrderQuery = async (id: string) => {
+export const fetchOrder = async (id: string) => {
   return await Order.findById(id).exec();
 };
 

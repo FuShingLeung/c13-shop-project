@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import Header from './Header';
+import Header from '@/components/Header';
 import {
   Container,
   Alert,
@@ -18,7 +18,7 @@ function Layout({ children }: Props) {
         <Header />
       </header>
       <main>
-        <Container maxWidth="md">{children}</Container>
+        <Container maxWidth="xl">{children}</Container>
       </main>
       {/* <Snackbar
         open={open}

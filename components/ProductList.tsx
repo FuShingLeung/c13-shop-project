@@ -8,7 +8,7 @@ import Paragraph from '@/components/Paragraph';
 import { ProductType } from '@/ts/interfaces/props.interfaces';
 
 const ProductList = ({
-  deleteHandler = () => {},
+  deleteHandler = (id: string) => {},
   headingLevel = 2,
   canUpdate = false,
   canRemove = false,

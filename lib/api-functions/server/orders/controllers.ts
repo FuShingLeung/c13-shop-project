@@ -1,7 +1,7 @@
+import { addOrderSchema, updateOrderSchema } from '@/lib/validation/';
 import {
-  getOrderQuery,
-  getOrdersQuery,
-  getUserOrdersQuery,
+  fetchOrder,
+  fetchOrders,
   add,
   update,
   remove,
@@ -10,28 +10,16 @@ import { Request, Response } from 'express';
 
 const getOrders = async (req: Request, res: Response) => {
   const { owner } = req.params;
-  console.log('🚀 ~ file: controllers.js:9 ~ getOrders ~ owner:', owner);
+  const { id } = req.params;
+  console.log('🚀 ~ file: controllers.js:9 ~ getOrders ~ id:', id);
 
   try {
     let data = [];
-    if (owner) {
-      data = await getOrderQuery(owner);
+    if (id) {
+      data = await fetchOrder(id);
     } else {
-      data = await getOrdersQuery();
+      data = await fetchOrders();
     }
-    res.status(200).json(data);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send(err);
-  }
-};
-
-const getOwnOrders = async (req: Request, res: Response) => {
-  const { owner } = req.params;
-  console.log('🚀 ~ file: controllers.js:9 ~ getOrders ~ owner:', owner);
-
-  try {
-    const data = await getUserOrdersQuery(req.user.sub);
     res.status(200).json(data);
   } catch (err) {
     console.log(err);
@@ -47,12 +35,12 @@ const addOrder = async (req: Request, res: Response) => {
   }
   console.info(orderData);
 
-  // try {
-  //   orderData = await addOrderSchema.validate(orderData);
-  // } catch (err) {
-  //   console.log(err);
-  //   return res.status(400).json(err);
-  // }
+  try {
+    orderData = await addOrderSchema.validate(orderData);
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json(err);
+  }
 
   try {
     const result = await add(orderData);
@@ -73,12 +61,12 @@ const updateOrder = async (req: Request, res: Response) => {
 
   let updates = { ...req.body };
 
-  // try {
-  //   updates = await updateOrderSchema.validate(updates);
-  // } catch (err) {
-  //   console.log(err);
-  //   return res.status(400).json(err);
-  // }
+  try {
+    updates = await updateOrderSchema.validate(updates);
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json(err);
+  }
 
   try {
     const result: any = await update(id, updates);
@@ -116,4 +104,4 @@ const removeOrder = async (req: Request, res: Response) => {
   }
 };
 
-export { getOrders, getOwnOrders, addOrder, updateOrder, removeOrder };
+export { getOrders, addOrder, updateOrder, removeOrder };
