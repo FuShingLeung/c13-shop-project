@@ -26,6 +26,6 @@
     "**/*.tsx",
     "lib/api-functions/server/products/model.js",
     "lib/api-functions/server/products/queries.js"
-  ],
+, "lib/api-functions/server/baskets/queries.js", "lib/api-functions/server/orders/queries.js"  ],
   "exclude": ["node_modules"]
 }
