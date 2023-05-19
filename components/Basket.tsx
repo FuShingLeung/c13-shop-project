@@ -1,7 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { dinero, toDecimal } from 'dinero.js';
-import { GBP } from '@dinero.js/currencies';
 import {
   Typography,
   List,
@@ -16,21 +14,15 @@ import {
   Box,
 } from '@/components/mui';
 import Heading from '@/components/Heading';
-import { slugify, formatPrice } from '@/lib/util/formatters';
+import { slugify } from '@/lib/utils/formatters';
+import { ProductType } from '@/ts/interfaces/props.interfaces';
 
 const ProductDisplay = ({
   product: { _id = '', title = '', image = '', price = 0, quantity = 0 } = {},
-  headingLevel = {},
   deleteHandler = (id: string) => {
     console.log('no delete handler supplied');
   },
-  addToBasket = (id: any) => {
-    console.log('no addToBasket handler supplied', id);
-  },
-  canUpdate = false,
-  canRemove = false,
-  canBuy = false,
-  test = false,
+  headingLevel = 2,
 }) => {
   return (
     <Card sx={{ width: '100%' }}>
@@ -53,7 +45,7 @@ const ProductDisplay = ({
             Price
           </Typography>
           <Typography component="dd" sx={{ fontWeight: 'bold' }}>
-            {formatPrice(toDecimal(dinero({ amount: price, currency: GBP })))}
+            £{(price / 100).toFixed(2)}
           </Typography>
           <Typography component="dt" sx={{ textAlign: 'right' }}>
             Quantity
@@ -65,27 +57,19 @@ const ProductDisplay = ({
       </CardContent>
       <CardActions sx={{ display: 'grid', placeItems: 'center' }}>
         <Box>
-          <Button
-            href={`/admin/products/${slugify(title, _id)}`}
-            component={Link}
-          >
+          <Button href={`/products/${slugify(title, _id)}`} component={Link}>
             View
           </Button>
-          {canUpdate && (
-            <IconButton
-              aria-label="update"
-              component={Link}
-              href={`/admin/products/update/${_id}`}
-            >
-              <EditIcon />
-            </IconButton>
-          )}
-          {canRemove && (
-            <IconButton aria-label="delete" onClick={() => deleteHandler(_id)}>
-              <DeleteIcon />
-            </IconButton>
-          )}
-          {canBuy && <Button onClick={addToBasket}>Add to Basket</Button>}
+          <IconButton
+            aria-label="update"
+            component={Link}
+            href={`/admin/products/update/${_id}`}
+          >
+            <EditIcon />
+          </IconButton>
+          <IconButton aria-label="delete" onClick={() => deleteHandler(_id)}>
+            <DeleteIcon />
+          </IconButton>
         </Box>
       </CardActions>
     </Card>

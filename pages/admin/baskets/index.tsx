@@ -11,7 +11,7 @@ import { Button } from '@/components/mui';
 import Layout from '@/components/Layout';
 import Heading from '@/components/Heading';
 import QueryBoundaries from '@/components/QueryBoundaries';
-import ProductList from '@/components/ProductList';
+import BasketList from '@/components/BasketList';
 
 export default function AdminBasketList() {
   const removeMutation = useDelete();
@@ -39,7 +39,7 @@ export default function AdminBasketList() {
           Add Basket
         </Button>
         <QueryBoundaries>
-          <ProductList deleteHandler={removeHandler} />
+          <BasketList deleteHandler={removeHandler} />
         </QueryBoundaries>
       </Layout>
     </>

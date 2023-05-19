@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { Schema } from 'yup';
 import Request from 'express';
+import { ObjectId } from 'mongoose';
 
 export interface Props {
   children: ReactNode;
@@ -44,12 +45,37 @@ export interface SingleBlogPost {
 }
 export interface BasketType {
   owner: string;
-  // items: Schema.Types.ObjectID;
+  items: ObjectId;
+  receiptURL: string;
+  _id?: string;
+  product?:
+    | {
+        _id?: string;
+        title?: string;
+        image?: string;
+        price?: number;
+        quantity?: number;
+      }
+    | undefined;
+  deleteHandler?: (id: string) => void;
+  headingLevel?: number;
 }
 export interface OrderType {
   owner: string;
-  // items:  Schema.Types.ObjectID,
+  items: ObjectId;
   receiptURL: string;
+  _id?: string;
+  product?:
+    | {
+        _id?: string;
+        title?: string;
+        image?: string;
+        price?: number;
+        quantity?: number;
+      }
+    | undefined;
+  deleteHandler?: (id: string) => void;
+  headingLevel?: number;
 }
 
 export interface ProductType {
@@ -66,4 +92,12 @@ export interface ProductListType {
   canUpdate: boolean;
   canRemove: boolean;
   canBuy: boolean;
+}
+
+export interface UserType {
+  nickname: string;
+  name: string;
+  picture: string;
+  email: string;
+  sub: string;
 }

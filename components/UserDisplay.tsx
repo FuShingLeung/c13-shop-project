@@ -10,18 +10,9 @@ import {
 } from '@/components/mui';
 import Paragraph from './Paragraph';
 import Heading from './Heading';
+import { UserType } from '@/ts/interfaces/props.interfaces';
 
-const UserDisplay = ({
-  user,
-}: {
-  user: {
-    nickname: string;
-    name: string;
-    picture: string;
-    email: string;
-    sub: string;
-  };
-}) => {
+const UserDisplay = ({ user }: { user: UserType }) => {
   const { nickname, name, picture, email, sub } = user;
 
   return (

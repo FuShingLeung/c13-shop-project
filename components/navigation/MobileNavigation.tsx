@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 
+import { useUser } from '@auth0/nextjs-auth0/client';
+
 import {
   Box,
   Drawer,
@@ -23,6 +25,9 @@ function MobileNavigation({
     textDecoration: 'none',
     flexGrow: '1',
   };
+
+  const { user } = useUser();
+
   return (
     <Box component="nav">
       <Drawer
@@ -62,6 +67,42 @@ function MobileNavigation({
                 <ListItemButton sx={{ textAlign: 'left' }}>
                   <ListItemText primary={'Contact Us'} />
                 </ListItemButton>
+                {user ? (
+                  <>
+                    <ListItem>
+                      <Link href={'/profile'} passHref style={itemLinkStyles}>
+                        <ListItemButton sx={{ textAlign: 'left' }}>
+                          <ListItemText primary={'Profile'} />
+                        </ListItemButton>
+                      </Link>
+                    </ListItem>
+                    <ListItem>
+                      <Link
+                        href={'/api/auth/logout'}
+                        passHref
+                        style={itemLinkStyles}
+                      >
+                        <ListItemButton
+                          sx={{ textAlign: 'left', width: '100%' }}
+                        >
+                          <ListItemText primary={'Log Out'} />
+                        </ListItemButton>
+                      </Link>
+                    </ListItem>
+                  </>
+                ) : (
+                  <ListItem>
+                    <Link
+                      href={'/api/auth/login'}
+                      passHref
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <ListItemButton sx={{ textAlign: 'left' }}>
+                        <ListItemText primary={'Log In'} />
+                      </ListItemButton>
+                    </Link>
+                  </ListItem>
+                )}
               </Link>
             </ListItem>
           </List>

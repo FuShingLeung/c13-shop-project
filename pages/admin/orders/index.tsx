@@ -11,7 +11,7 @@ import { Button, EditIcon } from '@/components/mui';
 import Layout from '@/components/Layout';
 import Heading from '@/components/Heading';
 import QueryBoundaries from '@/components/QueryBoundaries';
-import ProductList from '@/components/ProductList';
+import OrderList from '@/components/OrderList';
 
 export default function AdminOrderList() {
   const removeMutation = useDelete();
@@ -29,17 +29,14 @@ export default function AdminOrderList() {
       </Head>
       <Layout>
         <Heading component="h2" variant="h4">
-          Home page
+          Orders
         </Heading>
         <Button component={Link} variant="contained" href={`/admin/orders/add`}>
           Add Order
         </Button>
         <QueryBoundaries>
-          <ProductList deleteHandler={removeHandler} />
+          <OrderList deleteHandler={removeHandler} />
         </QueryBoundaries>
-        <Button variant="contained">
-          Button <EditIcon />
-        </Button>
       </Layout>
     </>
   );

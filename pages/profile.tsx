@@ -1,18 +1,14 @@
 import Head from 'next/head';
 
-import { dehydrate, QueryClient } from '@tanstack/react-query';
-import { fetchProducts } from '@/lib/api-functions/server/products/queries';
-import { STORAGE_KEY } from '@/lib/tq/products/settings';
-
-import { Button, EditIcon } from '@/components/mui';
-
 import Layout from '@/components/Layout';
 import Heading from '@/components/Heading';
 import Paragraph from '@/components/Paragraph';
 import QueryBoundaries from '@/components/QueryBoundaries';
-import ProductList from '@/components/ProductList';
+import UserDisplay from '@/components/UserDisplay';
+import { UserType } from '@/ts/interfaces/props.interfaces';
+import { withPageAuthRequired, getSession } from '@auth0/nextjs-auth0';
 
-export default function Home() {
+export default function Home({ user }: { user: UserType }) {
   return (
     <>
       <Head>
@@ -25,31 +21,27 @@ export default function Home() {
         <Heading component="h2" variant="h4">
           Profile
         </Heading>
-        {/* <QueryBoundaries>
-          <ProductList />
-        </QueryBoundaries> */}
-        <Button variant="contained">
-          Button <EditIcon />
-        </Button>
+        <QueryBoundaries>
+          <UserDisplay user={user} />
+        </QueryBoundaries>
       </Layout>
     </>
   );
 }
 
-export const getStaticProps = async () => {
-  const products = await fetchProducts().catch((err) =>
-    console.log('Index.tsx error', err),
-  );
-  const queryClient = new QueryClient();
+export const getServerSideProps = withPageAuthRequired({
+  async getServerSideProps(context: any) {
+    // Getting user data from Auth0
+    const session = await getSession(context.req, context.res);
+    const user = session ? session.user : null;
+    //returns an object like this one: {name: 'Bob', email: 'bob@email.com', email_verified: true}
 
-  await queryClient.setQueryData(
-    [STORAGE_KEY],
-    JSON.parse(JSON.stringify(products)),
-  );
+    // Querying data from DB
+    // const { db } = await connectToDatabase()
+    // const data = await db.collection("users").find({email: user.email}).project({ first_name: 1 }).toArray()
 
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-};
+    return {
+      props: { ssd: user },
+    };
+  },
+});
