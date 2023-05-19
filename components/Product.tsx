@@ -18,7 +18,6 @@ import {
 import Heading from '@/components/Heading';
 import { slugify, formatPrice } from '@/lib/util/formatters';
 
-import { ProductType } from '@/ts/interfaces/props.interfaces';
 
 const ProductDisplay = ({
   product: { _id = '', title = '', image = '', price = 0, quantity = 0 } = {},

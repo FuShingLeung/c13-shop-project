@@ -5,7 +5,7 @@ import { List, ListItem } from '@/components/mui';
 import Product from '@/components/Product';
 import Paragraph from '@/components/Paragraph';
 
-import { ProductType } from '@/ts/interfaces/props.interfaces';
+import { ProductFormData } from '@/ts/interfaces/props.interfaces';
 
 const ProductList = ({
   deleteHandler = (id: string) => {},
@@ -27,7 +27,7 @@ const ProductList = ({
         gridTemplateColumns: 'repeat(auto-fill, minmax(400px,1fr))',
       }}
     >
-      {products.map((product: ProductType) => (
+      {products.map((product: ProductFormData) => (
         <ListItem key={product._id} component="li">
           <Product
             product={product}

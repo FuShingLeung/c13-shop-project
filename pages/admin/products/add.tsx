@@ -6,13 +6,13 @@ import Layout from '@/components/Layout';
 import Heading from '@/components/Heading';
 import ProductForm from '@/components/forms/ProductForm';
 import { useAdd } from '@/lib/tq/products/mutations';
-import { ProductType } from '@/ts/interfaces/props.interfaces';
+import { ProductFormData } from '@/ts/interfaces/props.interfaces';
 
 export default function AddProduct() {
   const router = useRouter();
   const addMutation = useAdd();
 
-  const submitHandler = (data: ProductType) => {
+  const submitHandler = (data: ProductFormData) => {
     addMutation.mutate(data);
     router.push('/admin/products/');
   };

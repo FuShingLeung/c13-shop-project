@@ -1,4 +1,4 @@
-import { addBasketSchema, updateBasketSchema } from '@/lib/validation';
+// import { addBasketSchema, updateBasketSchema } from '@/lib/validation';
 import {
   fetchBasket,
   fetchBaskets,
@@ -33,12 +33,12 @@ const addBasket = async (req: Request, res: Response) => {
   }
   console.info(basketData);
 
-  try {
-    basketData = await addBasketSchema.validate(basketData);
-  } catch (err) {
-    console.log(err);
-    return res.status(400).json(err);
-  }
+  // try {
+  //   basketData = await addBasketSchema.validate(basketData);
+  // } catch (err) {
+  //   console.log(err);
+  //   return res.status(400).json(err);
+  // }
 
   try {
     const result = await add(basketData);
@@ -59,12 +59,12 @@ const updateBasket = async (req: Request, res: Response) => {
 
   let updates = { ...req.body };
 
-  try {
-    updates = await updateBasketSchema.validate(updates);
-  } catch (err) {
-    console.log(err);
-    return res.status(400).json(err);
-  }
+  // try {
+  //   updates = await updateBasketSchema.validate(updates);
+  // } catch (err) {
+  //   console.log(err);
+  //   return res.status(400).json(err);
+  // }
 
   try {
     const result: any = await update(id, updates);

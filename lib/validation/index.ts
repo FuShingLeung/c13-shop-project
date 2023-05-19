@@ -28,4 +28,13 @@ const updateProductSchema = yup
   })
   .required();
 
+export interface ProductSchemaType
+  extends yup.InferType<typeof addProductSchema> {
+  image: string;
+  title: string;
+  description: string;
+  price: number;
+  quantity: number;
+}
+
 export { addProductSchema, updateProductSchema };

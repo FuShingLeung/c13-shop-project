@@ -1,4 +1,4 @@
-import { addOrderSchema, updateOrderSchema } from '@/lib/validation/';
+// import { addOrderSchema, updateOrderSchema } from '@/lib/validation/';
 import {
   fetchOrder,
   fetchOrders,
@@ -35,12 +35,12 @@ const addOrder = async (req: Request, res: Response) => {
   }
   console.info(orderData);
 
-  try {
-    orderData = await addOrderSchema.validate(orderData);
-  } catch (err) {
-    console.log(err);
-    return res.status(400).json(err);
-  }
+  // try {
+  // orderData = await addOrderSchema.validate(orderData);
+  // } catch (err) {
+  //   console.log(err);
+  //   return res.status(400).json(err);
+  // }
 
   try {
     const result = await add(orderData);
@@ -61,12 +61,7 @@ const updateOrder = async (req: Request, res: Response) => {
 
   let updates = { ...req.body };
 
-  try {
-    updates = await updateOrderSchema.validate(updates);
-  } catch (err) {
-    console.log(err);
-    return res.status(400).json(err);
-  }
+  // try {s
 
   try {
     const result: any = await update(id, updates);

@@ -22,9 +22,9 @@ export interface ContactFormData {
 
 export interface ProductFormData {
   _id: string;
+  image: string;
   title: string;
   description?: string;
-  image: string;
   price: number;
   quantity: number;
 }
@@ -53,12 +53,11 @@ export interface OrderType {
 }
 
 export interface ProductType {
-  _id: string;
-  title: string;
-  description?: string;
-  image: string;
-  price: number;
-  quantity: number;
+  image: '';
+  title: '';
+  description: '';
+  price: '';
+  quantity: '';
 }
 
 export interface ProductListType {

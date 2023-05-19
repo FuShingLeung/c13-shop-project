@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { fetchProducts } from '@/lib/api-functions/server/products/queries';
 import { STORAGE_KEY } from '@/lib/tq/products/settings';
-import { useDelete } from '@/lib/tq/product/mutations';
+import { useDelete } from '@/lib/tq/products/mutations';
 
 import { Button, EditIcon } from '@/components/mui';
 

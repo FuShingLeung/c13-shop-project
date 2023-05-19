@@ -7,7 +7,11 @@ import { TextField, Button } from '@/components/mui';
 
 import { ProductFormData } from '@/ts/interfaces/props.interfaces';
 
-import { addProductSchema, updateProductSchema } from '@/lib/validation';
+import {
+  addProductSchema,
+  updateProductSchema,
+  ProductSchemaType,
+} from '@/lib/validation';
 
 const defaults = {
   image: '',
@@ -22,9 +26,15 @@ export default function ProductForm({
   product,
 }: {
   submitHandler: (val: ProductFormData) => void;
-  product?: {};
+  product?: {
+    image: '';
+    title: '';
+    description: '';
+    price: '';
+    quantity: '';
+  };
 }) {
-  let schema = addProductSchema;
+  let schema: any = addProductSchema;
   if (product) {
     schema = updateProductSchema;
   }
@@ -44,7 +54,7 @@ export default function ProductForm({
     marginBlockEnd: '1em',
   };
 
-  let submitFn = (vals: ProductFormData) => {
+  let submitFn = (vals: any) => {
     reset();
     submitHandler(vals);
   };

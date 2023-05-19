@@ -1,6 +1,7 @@
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import AppBar from '@mui/material/AppBar';
+import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
@@ -29,6 +30,7 @@ export {
   Button,
   Alert,
   AppBar,
+  Avatar,
   Box,
   Card,
   CardMedia,

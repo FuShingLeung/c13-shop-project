@@ -1,4 +1,4 @@
-import { ProductType } from '@/ts/interfaces/props.interfaces';
+import { ProductFormData } from '@/ts/interfaces/props.interfaces';
 import axios from 'axios';
 
 const { host = 'http://localhost:3000' } = process.env;
@@ -12,7 +12,7 @@ export const fetchProducts = async () => {
   return data;
 };
 
-export const addProduct = async (data: ProductType) => {
+export const addProduct = async (data: ProductFormData) => {
   console.log('about to add', data);
   const response = await axios({
     method: 'POST',

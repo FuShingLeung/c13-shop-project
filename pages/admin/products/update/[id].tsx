@@ -18,9 +18,9 @@ import ProductList from '@/components/ProductList';
 import ProductForm from '@/components/forms/ProductForm';
 
 import { useUpdate } from '@/lib/tq/products/mutations';
-import { ProductFormData } from '@/ts/interfaces/props.interfaces';
+import { ProductFormData, ProductType } from '@/ts/interfaces/props.interfaces';
 
-export default function UpdateProduct({ ssd: [] }) {
+export default function UpdateProduct({ ssd }: { ssd: ProductType }) {
   const router = useRouter();
   const updateMutation = useUpdate();
 
@@ -28,6 +28,7 @@ export default function UpdateProduct({ ssd: [] }) {
     updateMutation.mutate(data);
     router.push('/admin/products/');
   };
+
   return (
     <>
       <Head>
@@ -41,13 +42,13 @@ export default function UpdateProduct({ ssd: [] }) {
         <Heading component="h2" variant="h4">
           Edit Product
         </Heading>
-        <ProductForm submitHandler={useUpdate} product={ssd} />
+        <ProductForm submitHandler={submitHandler} product={ssd} />
       </Layout>
     </>
   );
 }
 
-export const getServerSideProps = async ({ params }) => {
+export const getServerSideProps = async ({ params }: any) => {
   const product = await fetchProduct(params.id).catch((err) =>
     console.log(err),
   );
