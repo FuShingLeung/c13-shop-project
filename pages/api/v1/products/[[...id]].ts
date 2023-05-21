@@ -10,7 +10,7 @@ import {
   checkRole,
 } from '@/lib/api-functions/server/utils';
 
-import permissions from '@/lib/api-functions/server/permissions.js';
+import permissions from '@/lib/api-functions/server/permissions';
 
 const {
   identifier,
