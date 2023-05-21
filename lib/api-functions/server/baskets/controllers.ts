@@ -1,24 +1,39 @@
 // import { addBasketSchema, updateBasketSchema } from '@/lib/validation';
 import {
-  fetchBasket,
-  fetchBaskets,
+  getBasketQuery,
+  getUserBasketQuery,
   add,
   update,
   remove,
+  empty,
+  getBasketsQuery,
 } from '@/lib/api-functions/server/baskets/queries';
 import { Request, Response } from 'express';
 
 const getBaskets = async (req: Request, res: Response) => {
-  const { id } = req.params;
+  const { owner } = req.params;
+
+  const query: any = {};
+
+  if (owner) {
+    query.owner = owner;
+  }
 
   try {
-    let data = [];
-    if (id) {
-      data = await fetchBasket(id);
-    } else {
-      data = await fetchBaskets();
-    }
+    let data = await getBasketsQuery(query);
     res.status(200).json(data);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+};
+
+const getOwnBasket = async (req: Request, res: Response) => {
+  const owner = req?.user?.sub;
+
+  try {
+    let data = await getUserBasketQuery(owner, true);
+    return res.status(200).json(data);
   } catch (err) {
     console.log(err);
     res.status(500).send(err);
@@ -42,6 +57,25 @@ const addBasket = async (req: Request, res: Response) => {
 
   try {
     const result = await add(basketData);
+    res.status(201).json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
+};
+
+const addToUserBasket = async (req: Request, res: Response) => {
+  const { itemID } = req.body;
+  console.log('user', req.user);
+
+  const owner = req?.user?.sub;
+  console.log('owner', owner);
+
+  try {
+    const basket = await getUserBasketQuery(owner);
+    console.log('basket', basket);
+    basket.items.push(itemID);
+    const result = await basket.save();
     res.status(201).json(result);
   } catch (err) {
     console.error(err);
@@ -102,4 +136,53 @@ const removeBasket = async (req: Request, res: Response) => {
   }
 };
 
-export { getBaskets, addBasket, updateBasket, removeBasket };
+const removeItemFromBasket = async (req: Request, res: Response) => {
+  const { item } = req.params;
+  console.log('🚀 ~ file: controllers.js:99 ~ removeBasket ~ item:', item);
+
+  if (!item) {
+    return res.status(400).json({ message: 'No item provided to delete' });
+  }
+
+  const owner = req?.user?.sub;
+
+  try {
+    // All handler
+    let result: any = {};
+    if (item === 'all') {
+      result = await empty(owner);
+    } else {
+      const [basket] = await getUserBasketQuery(owner);
+      console.log('b', basket);
+      if (basket) {
+        const idx = basket.items.findIndex(
+          (i: any) => i._id.toString() === item,
+        );
+        console.log('idx', idx);
+        if (idx !== -1) {
+          basket.items = [
+            ...basket.items.slice(0, idx),
+            ...basket.items.slice(idx + 1),
+          ];
+          result = await basket.save();
+        }
+      }
+    }
+
+    if (result.n === 0) return res.status(404).end('Not Found');
+    res.status(204).end();
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
+};
+
+export {
+  getBaskets,
+  getOwnBasket,
+  addBasket,
+  addToUserBasket,
+  updateBasket,
+  removeBasket,
+  removeItemFromBasket,
+};
