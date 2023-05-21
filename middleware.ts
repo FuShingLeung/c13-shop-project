@@ -3,9 +3,6 @@ import {
   withMiddlewareAuthRequired,
   getSession,
 } from '@auth0/nextjs-auth0/edge';
-import { NextMiddleware } from 'next/server';
-import { NextMiddlewareResult } from 'next/dist/server/web/types';
-import { Request } from 'express';
 
 import { checkRole } from '@/lib/api-functions/server/utils';
 import settings from '@/lib/api-functions/server/permissions';

@@ -1,6 +1,6 @@
 import { Typography } from '@/components/mui';
 
-const Paragraph = ({ children, ...props }: { children: String }) => {
+const Paragraph = ({ children, ...props }: { children: any }) => {
   return (
     <Typography paragraph {...props}>
       {children}

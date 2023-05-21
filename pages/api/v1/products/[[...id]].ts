@@ -1,24 +1,21 @@
 import nc from 'next-connect';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Request, Response, request } from 'express';
+import { Request, Response } from 'express';
 
 import { getSession } from '@auth0/nextjs-auth0';
 
 import {
   handleUnauthorisedAPICall,
   checkPermissions,
-  checkRole,
 } from '@/lib/api-functions/server/utils';
 
 import permissions from '@/lib/api-functions/server/permissions';
 
 const {
   identifier,
-  roles: { admin },
   permissions: {
     products: {
       create: createProducts,
-      read: readProducts,
       update: updateProducts,
       remove: removeProducts,
     },

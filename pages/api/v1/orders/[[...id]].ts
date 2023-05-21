@@ -7,18 +7,15 @@ import { getSession } from '@auth0/nextjs-auth0';
 import {
   handleUnauthorisedAPICall,
   checkPermissions,
-  checkRole,
 } from '@/lib/api-functions/server/utils';
 
 import permissions from '@/lib/api-functions/server/permissions';
 
 const {
   identifier,
-  roles: { admin },
   permissions: {
     orders: {
       create: createOrders,
-      read: readOrders,
       update: updateOrders,
       remove: removeOrders,
     },

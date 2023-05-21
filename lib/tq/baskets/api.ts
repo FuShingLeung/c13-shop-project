@@ -1,12 +1,13 @@
 import { BasketType } from '@/ts/interfaces/props.interfaces';
 import axios from 'axios';
 
-export const BASKETS_ENDPOINT = '/api/v1/baskets/';
+export const BASKETS_ENDPOINT = `/api/v1/baskets/`;
 
 // User functions
 export const fetchUserBasket = async () => {
-  const { data } = await axios(`${BASKETS_ENDPOINT}own`);
-  console.log('fetchUserBasket data', data);
+  const { data } = await axios(`${BASKETS_ENDPOINT}`);
+  // const data = {};
+  // console.log('fetchUserBasket data', data);
   return data;
 };
 

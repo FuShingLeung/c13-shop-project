@@ -12,6 +12,8 @@ import {
 import { useTheme } from '@mui/material/styles';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
+import ShoppingCartDisplay from '@/components/BasketDisplay';
+
 function DesktopNavigation({
   handleDrawerToggle = () =>
     console.log('no handleDrawerToggle function provided'),

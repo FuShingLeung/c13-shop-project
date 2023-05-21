@@ -18,7 +18,6 @@ const {
   permissions: {
     baskets: {
       create: createBaskets,
-      read: readBaskets,
       update: updateBaskets,
       remove: removeBaskets,
     },

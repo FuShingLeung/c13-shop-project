@@ -28,6 +28,6 @@
     "lib/api-functions/server/products/queries.js",
     "lib/api-functions/server/baskets/queries.js",
     "lib/api-functions/server/orders/queries.js"
-  ],
+, "lib/tq/baskets/queries.ts"  ],
   "exclude": ["node_modules"]
 }

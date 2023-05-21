@@ -1,5 +1,6 @@
 const settings = Object.freeze({
   identifier: 'https://c13-fs-demo2.vercel.app',
+  // identifier: 'http://localhost:3000',
   rolesPath: '/roles',
   permissionsPath: '/user_authorization',
   roles: {

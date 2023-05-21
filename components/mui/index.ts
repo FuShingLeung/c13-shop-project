@@ -2,6 +2,7 @@ import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
+import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
@@ -25,12 +26,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 export {
   Button,
   Alert,
   AppBar,
   Avatar,
+  Badge,
   Box,
   Card,
   CardMedia,
@@ -53,4 +56,5 @@ export {
   EditIcon,
   MenuIcon,
   IconButton,
+  ShoppingCartIcon,
 };

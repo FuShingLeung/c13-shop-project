@@ -16,7 +16,7 @@ import {
   Box,
 } from '@/components/mui';
 import Heading from '@/components/Heading';
-import { slugify, formatPrice } from '@/lib/util/formatters';
+import { slugify, formatPrice } from '@/lib/utils/formatters';
 
 const ProductDisplay = ({
   product: { _id = '', title = '', image = '', price = 0, quantity = 0 } = {},
@@ -30,7 +30,6 @@ const ProductDisplay = ({
   canUpdate = false,
   canRemove = false,
   canBuy = false,
-  test = false,
 }) => {
   return (
     <Card sx={{ width: '100%' }}>

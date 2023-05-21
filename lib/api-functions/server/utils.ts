@@ -5,9 +5,9 @@ const checkPermissions = (
   API: string,
   permission: string,
 ) => {
-  // console.log(user, API, permission);
+  // console.log('user', user, 'api', API);
   const permissions = user[`${API}/user_authorization`]?.permissions;
-  console.log(permissions, permission);
+  // console.log('permissions', permissions, 'permission', permission);
   return permissions?.includes?.(permission);
 };
 
